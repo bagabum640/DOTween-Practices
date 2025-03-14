@@ -1,53 +1,28 @@
 using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TextAnimations : MonoBehaviour
 {
     [SerializeField] private Text _text;
-    [SerializeField] private float _duration = 1.5f;
-    [SerializeField] private float _delay = 2f;
-
-    private WaitForSeconds _wait;
+    [SerializeField] private float _duration = 1f;
+    [SerializeField] private float _delay = 1f;
 
     private void Start()
     {
-        _wait = new(_delay);
-
-        StartCoroutine(WritingText());
+        CreateTextAnimationSequence();
     }
 
-    private IEnumerator WritingText()
+    private void CreateTextAnimationSequence()
     {
-        while (enabled)
-        {
-            ReplacementText();
+        Sequence sequence = DOTween.Sequence();
 
-            yield return _wait;
+        sequence.Append(_text.DOText("1111", _duration))
+            .AppendInterval(_delay)
+            .Append(_text.DOText("2222", _duration).SetRelative())
+            .AppendInterval(_delay)
+            .Append(_text.DOText("3333", _duration));
 
-            AdditionText();
-
-            yield return _wait;
-
-            HackingText();
-
-            yield return _wait;
-        }
-    }
-
-    private void ReplacementText()
-    {
-        _text.DOText("1111", _duration);
-    }
-
-    private void AdditionText()
-    {
-        _text.DOText("2222", _duration).SetRelative();
-    }
-
-    private void HackingText()
-    {
-        _text.DOText("3333", _duration);
+        sequence.SetLoops(-1);
     }
 }
