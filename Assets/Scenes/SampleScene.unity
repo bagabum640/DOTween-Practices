@@ -1039,8 +1039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1803517865}
-  _duration: 1.5
-  _delay: 2
+  _duration: 1
+  _delay: 1
 --- !u!114 &1803517865
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,18 +2,17 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextAnimations : MonoBehaviour
+public class TextChanger : ObjectController
 {
     [SerializeField] private Text _text;
-    [SerializeField] private float _duration = 1f;
     [SerializeField] private float _delay = 1f;
 
     private void Start()
     {
-        CreateTextAnimationSequence();
+        StartTween();
     }
 
-    private void CreateTextAnimationSequence()
+    protected override void StartTween()
     {
         Sequence sequence = DOTween.Sequence();
 
@@ -23,6 +22,6 @@ public class TextAnimations : MonoBehaviour
             .AppendInterval(_delay)
             .Append(_text.DOText("3333", _duration));
 
-        sequence.SetLoops(-1);
+        sequence.SetLoops(InfiniteLoops);
     }
 }

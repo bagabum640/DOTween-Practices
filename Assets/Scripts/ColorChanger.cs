@@ -2,10 +2,9 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class ColorChanger : MonoBehaviour
+public class ColorChanger : ObjectController
 {
     [SerializeField] private MeshRenderer _meshRenderer;
-    [SerializeField] private float _duration = 3f;
     [SerializeField] private float _delay = 2f;
 
     private WaitForSeconds _wait;
@@ -14,7 +13,7 @@ public class ColorChanger : MonoBehaviour
     {
         _wait = new(_delay);
 
-        StartCoroutine(ChangeColor());
+        StartTween();
     }
 
     private IEnumerator ChangeColor()
@@ -25,6 +24,11 @@ public class ColorChanger : MonoBehaviour
 
             yield return _wait;
         }
+    }
+
+    protected override void StartTween()
+    {
+        StartCoroutine(ChangeColor());
     }
 
     private Color GetColor()
